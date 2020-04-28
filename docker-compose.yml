@@ -1,0 +1,22 @@
+version: '3'
+services:
+  gnpslibrarycyano-dash:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gnpslibrarycyano-dash
+    volumes:
+      - ./output:/app/output:rw
+      - ./logs:/app/logs:rw
+    ports:
+    - "8785:5000"
+    networks:
+      - default
+    restart: unless-stopped
+    command: /app/run_server.sh
+
+
+networks:
+  nginx-net:
+    external:
+      name: nginx-net
